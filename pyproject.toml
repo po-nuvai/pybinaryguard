@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "pybinaryguard"
@@ -48,10 +48,12 @@ opencv = "pybinaryguard.plugins.contrib.opencv:register"
 gstreamer = "pybinaryguard.plugins.contrib.gstreamer:register"
 
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["pybinaryguard*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 addopts = "-v --tb=short"
 
 [tool.mypy]

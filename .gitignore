@@ -35,5 +35,5 @@ htmlcov/
 *.tar.gz
 *.zip
 
-# Claude Code
+# Config
 .claude/

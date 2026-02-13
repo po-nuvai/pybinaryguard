@@ -314,75 +314,84 @@ for error in guard.captured_errors:
 
 ```
 pybinaryguard/
-|-- __init__.py              # Public API (scan, check, profile, inspect)
-|-- scanner.py               # Core orchestrator
 |
-|-- models/                  # Data structures
-|   |-- system.py            # SystemProfile dataclass
-|   |-- finding.py           # Finding, ScanReport
-|   |-- package.py           # PackageBinaryInfo, SharedObjectInfo
-|   +-- enums.py             # Severity, ScanMode
+|-- pyproject.toml               # Packaging config (PEP 621)
+|-- README.md
+|-- LICENSE
+|-- CHANGELOG.md
+|-- .gitignore
 |
-|-- probes/                  # System information collectors
-|   |-- os_probe.py          # OS, GLIBC, container detection
-|   |-- python_probe.py      # Python version, ABI flags
-|   |-- cpu_probe.py         # Architecture, instruction sets
-|   |-- gpu_probe.py         # CUDA, GPU compute capability
-|   |-- glibc_probe.py       # GLIBC version detection
-|   |-- library_probe.py     # System shared library inventory
-|   +-- board_probe.py       # Embedded board detection (Jetson, RPi)
+|-- src/
+|   +-- pybinaryguard/
+|       |-- __init__.py          # Public API (scan, check, profile, inspect)
+|       |-- scanner.py           # Core orchestrator
+|       |
+|       |-- models/              # Data structures
+|       |   |-- system.py        # SystemProfile dataclass
+|       |   |-- finding.py       # Finding, ScanReport
+|       |   |-- package.py       # PackageBinaryInfo, SharedObjectInfo
+|       |   +-- enums.py         # Severity, ScanMode
+|       |
+|       |-- probes/              # System information collectors
+|       |   |-- os_probe.py      # OS, GLIBC, container detection
+|       |   |-- python_probe.py  # Python version, ABI flags
+|       |   |-- cpu_probe.py     # Architecture, instruction sets
+|       |   |-- gpu_probe.py     # CUDA, GPU compute capability
+|       |   |-- glibc_probe.py   # GLIBC version detection
+|       |   |-- library_probe.py # System shared library inventory
+|       |   +-- board_probe.py   # Embedded board detection (Jetson, RPi)
+|       |
+|       |-- analyzers/           # Package binary inspectors
+|       |   |-- elf_analyzer.py  # ELF header & symbol table parsing
+|       |   |-- wheel_analyzer.py
+|       |   |-- symbol_analyzer.py
+|       |   +-- dependency_analyzer.py
+|       |
+|       |-- rules/               # Compatibility rule engine
+|       |   |-- engine.py        # Rule evaluation orchestrator
+|       |   +-- builtin/         # 20+ built-in rules
+|       |       |-- glibc_rules.py
+|       |       |-- cuda_rules.py
+|       |       |-- arch_rules.py
+|       |       |-- cpu_rules.py
+|       |       |-- numpy_rules.py
+|       |       |-- container_rules.py
+|       |       |-- python_abi_rules.py
+|       |       |-- board_profile_rules.py
+|       |       |-- framework_rules.py
+|       |       +-- predictive_rules.py
+|       |
+|       |-- scoring/             # Health scoring v2
+|       |   +-- engine.py        # Multi-dimensional weighted scoring
+|       |
+|       |-- profiles/            # Board profile engine
+|       |   +-- engine.py        # Board detection & matching
+|       |
+|       |-- diagnostics/         # Error explanation
+|       |   |-- findings.py
+|       |   |-- explainer.py
+|       |   +-- suggestions.py
+|       |
+|       |-- agent/               # Agent SDK
+|       |   |-- tool_interface.py
+|       |   |-- recommender.py
+|       |   |-- schema.py        # Tool schema export (OpenAI/MCP)
+|       |   |-- simulator.py     # Pre-install compatibility prediction
+|       |   +-- guard.py         # Runtime import guard
+|       |
+|       |-- plugins/             # Plugin system
+|       |   |-- loader.py
+|       |   |-- hooks.py
+|       |   +-- contrib/         # Built-in plugins (Jetson, TensorRT, OpenCV, GStreamer)
+|       |
+|       +-- cli/                 # Command-line interface
+|           |-- main.py          # Argument parser
+|           |-- commands.py      # Command handlers
+|           +-- formatters.py    # Output formatting (table/json/minimal)
 |
-|-- analyzers/               # Package binary inspectors
-|   |-- elf_analyzer.py      # ELF header & symbol table parsing
-|   |-- wheel_analyzer.py    # Wheel metadata extraction
-|   |-- symbol_analyzer.py   # Symbol resolution & conflict detection
-|   +-- dependency_analyzer.py
-|
-|-- rules/                   # Compatibility rule engine
-|   |-- engine.py            # Rule evaluation orchestrator
-|   +-- builtin/             # 20+ built-in rules
-|       |-- glibc_rules.py
-|       |-- cuda_rules.py
-|       |-- arch_rules.py
-|       |-- cpu_rules.py
-|       |-- numpy_rules.py
-|       |-- container_rules.py
-|       |-- python_abi_rules.py
-|       |-- board_profile_rules.py
-|       |-- framework_rules.py
-|       +-- predictive_rules.py
-|
-|-- scoring/                 # Health scoring v2
-|   +-- engine.py            # Multi-dimensional weighted scoring
-|
-|-- profiles/                # Board profile engine
-|   +-- engine.py            # Board detection & matching
-|
-|-- diagnostics/             # Error explanation
-|   |-- findings.py          # Finding classification
-|   |-- explainer.py         # Human-readable explanations
-|   +-- suggestions.py       # Fix suggestion generator
-|
-|-- agent/                   # Agent SDK
-|   |-- tool_interface.py    # Structured output API
-|   |-- recommender.py       # Action recommendation engine
-|   |-- schema.py            # Tool schema export (OpenAI/MCP)
-|   |-- simulator.py         # Pre-install compatibility prediction
-|   +-- guard.py             # Runtime import guard
-|
-|-- plugins/                 # Plugin system
-|   |-- loader.py            # Plugin discovery & loading
-|   |-- hooks.py             # Plugin hook points
-|   +-- contrib/             # Built-in plugins
-|       |-- jetson.py
-|       |-- tensorrt.py
-|       |-- opencv.py
-|       +-- gstreamer.py
-|
-+-- cli/                     # Command-line interface
-    |-- main.py              # Argument parser
-    |-- commands.py          # Command handlers
-    +-- formatters.py        # Output formatting (table/json/minimal)
+|-- tests/                       # 450 tests
+|-- docs/                        # Documentation
++-- examples/                    # Usage examples
 ```
 
 ### Design Principles
