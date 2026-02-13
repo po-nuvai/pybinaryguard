@@ -25,6 +25,34 @@
 
 ---
 
+## Origin Story
+
+Back in college, I was working on real-time object detection on an **NVIDIA Jetson TX2** — computer vision, image processing, and ML models for live detection. I spent weeks writing the code. Tested the logic. Verified every layer, every weight, every preprocessing step. The code had **zero errors**.
+
+Then I hit run.
+
+```
+Illegal instruction (core dumped)
+```
+
+That's it. No traceback. No helpful message. Just — *"instruction unclear, core dumped."*
+
+I stared at the screen. I checked the code again. **Nothing was wrong.** I rewrote parts of it. Same crash. I tried different package versions. Same crash. I searched Stack Overflow for hours. Nothing worked.
+
+This went on for **days**. Every single day, the same cryptic error. I started questioning my own code, my understanding of Python, everything. It was pure rage.
+
+Then one day I finally figured it out — it wasn't my code at all. The pip packages I installed were compiled for a different architecture. The CUDA toolkit version didn't match what PyTorch expected. The GLIBC on the Jetson was too old for the prebuilt wheels. The binaries simply didn't belong on that hardware.
+
+**My code was perfect. The binaries were incompatible.**
+
+And the worst part? There was no tool to tell me this. No `pip check` that catches binary mismatches. No scanner that says *"hey, this .so file needs GLIBC 2.34 but you only have 2.27."* Nothing.
+
+I told myself: if I ever get the chance, I'll build the tool I wish I had during those sleepless nights on the Jetson. Something that looks at your system — your CPU, your GPU, your GLIBC, your CUDA — and tells you **what's actually wrong** before you waste another day blaming your own code.
+
+That tool is **PyBinaryGuard**.
+
+---
+
 ## The Problem
 
 You install a Python package. Your code is correct. Your machine is fine. **It still crashes.**
