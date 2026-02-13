@@ -1,0 +1,75 @@
+{
+  "board_id": "coral_dev_board",
+  "display_name": "Google Coral Dev Board",
+  "vendor": "google",
+  "architecture": "aarch64",
+  "detection": {
+    "dt_model_patterns": [
+      "Freescale i.MX8MQ",
+      "coral"
+    ],
+    "cpu_model_patterns": [
+      "ARM Cortex-A53"
+    ]
+  },
+  "specs": {
+    "cuda_compute_capability": null,
+    "max_cuda_version": null,
+    "recommended_os": "Mendel Linux",
+    "gpu_model": "Vivante GC7000Lite",
+    "tpu": "Edge TPU (4 TOPS)",
+    "ram_gb": 1,
+    "recommended_glibc": "2.28",
+    "kernel_version_min": "4.14"
+  },
+  "compatibility": {
+    "python_versions": ["3.7", "3.8", "3.9"],
+    "manylinux_tags": ["manylinux2014_aarch64"],
+    "tflite_versions": ["2.5", "2.10"],
+    "required_packages": ["pycoral", "tflite-runtime"]
+  },
+  "known_issues": {
+    "broken_wheels": [
+      {
+        "package": "tensorflow",
+        "versions": ["*"],
+        "reason": "Full TensorFlow not supported, use tflite-runtime",
+        "recommendation": "Use tflite-runtime for inference only"
+      },
+      {
+        "package": "torch",
+        "versions": ["*"],
+        "reason": "PyTorch not optimized for Edge TPU",
+        "recommendation": "Convert models to TFLite format"
+      },
+      {
+        "package": "pycoral",
+        "versions": [">=2.1.0"],
+        "reason": "Newer pycoral versions incompatible with older Mendel",
+        "recommendation": "Use pycoral==2.0.0"
+      }
+    ],
+    "incompatible_packages": [
+      "nvidia-*",
+      "tensorrt",
+      "onnxruntime-gpu"
+    ]
+  },
+  "recommendations": {
+    "use_mendel_packages": "Prefer apt packages over pip when available",
+    "model_format": "Use TFLite models quantized for Edge TPU",
+    "compiler": "Use edgetpu_compiler for model optimization",
+    "usb_tpu": "Also works with USB Accelerator on other boards"
+  },
+  "validated_stacks": [
+    {
+      "name": "Edge TPU Inference",
+      "packages": {
+        "pycoral": "2.0.0",
+        "tflite-runtime": "2.5.0",
+        "pillow": "8.3.2",
+        "numpy": "1.19.5"
+      }
+    }
+  ]
+}

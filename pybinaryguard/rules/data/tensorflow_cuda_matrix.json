@@ -1,0 +1,8 @@
+{
+  "2.12.0": {"cuda": "11.8", "cudnn": "8.6", "min_compute": [3, 5]},
+  "2.13.0": {"cuda": "11.8", "cudnn": "8.6", "min_compute": [3, 5]},
+  "2.14.0": {"cuda": "11.8", "cudnn": "8.7", "min_compute": [3, 5]},
+  "2.15.0": {"cuda": "12.2", "cudnn": "8.9", "min_compute": [3, 5]},
+  "2.16.0": {"cuda": "12.3", "cudnn": "8.9", "min_compute": [3, 5]},
+  "2.17.0": {"cuda": "12.3", "cudnn": "9.1", "min_compute": [3, 5]}
+}

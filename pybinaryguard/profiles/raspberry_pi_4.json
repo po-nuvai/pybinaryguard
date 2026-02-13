@@ -1,0 +1,67 @@
+{
+  "board_id": "raspberry_pi_4",
+  "display_name": "Raspberry Pi 4",
+  "vendor": "raspberry_pi",
+  "architecture": "aarch64",
+  "detection": {
+    "dt_model_patterns": [
+      "Raspberry Pi 4"
+    ],
+    "cpu_model_patterns": [
+      "ARM Cortex-A72"
+    ],
+    "revision_codes": ["a03111", "b03111", "c03111"]
+  },
+  "specs": {
+    "cuda_compute_capability": null,
+    "max_cuda_version": null,
+    "recommended_os": "Raspberry Pi OS (64-bit)",
+    "gpu_model": "VideoCore VI",
+    "ram_gb": 8,
+    "recommended_glibc": "2.31",
+    "kernel_version_min": "5.10"
+  },
+  "compatibility": {
+    "python_versions": ["3.9", "3.10", "3.11"],
+    "manylinux_tags": ["manylinux2014_aarch64", "manylinux_2_31_aarch64"],
+    "cuda_versions": [],
+    "opencv_backends": ["V4L2", "GStreamer"]
+  },
+  "known_issues": {
+    "broken_wheels": [
+      {
+        "package": "torch",
+        "versions": [">=2.0.0"],
+        "reason": "PyTorch 2.x wheels require newer GLIBC not available on older Pi OS",
+        "recommendation": "Upgrade to 64-bit OS or use torch==1.13.1"
+      },
+      {
+        "package": "tensorflow",
+        "versions": [">=2.10.0"],
+        "reason": "No ARM64 wheels for TensorFlow 2.10+",
+        "recommendation": "Use tensorflow==2.9.0 or tensorflow-aarch64"
+      }
+    ],
+    "incompatible_packages": [
+      "nvidia-*",
+      "cupy",
+      "tensorrt"
+    ]
+  },
+  "recommendations": {
+    "use_64bit_os": "Strongly recommended for Python 3.10+",
+    "enable_hardware_accel": "Compile OpenCV with NEON optimizations",
+    "install_from_source": ["opencv-python"],
+    "thermal_management": "Install heatsink, monitor with vcgencmd"
+  },
+  "validated_stacks": [
+    {
+      "name": "Edge ML with TFLite",
+      "packages": {
+        "tflite-runtime": "2.9.0",
+        "numpy": "1.23.0",
+        "pillow": "9.2.0"
+      }
+    }
+  ]
+}

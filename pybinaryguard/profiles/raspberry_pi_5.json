@@ -1,0 +1,82 @@
+{
+  "board_id": "raspberry_pi_5",
+  "display_name": "Raspberry Pi 5",
+  "vendor": "raspberry_pi",
+  "architecture": "aarch64",
+  "detection": {
+    "dt_model_patterns": [
+      "Raspberry Pi 5"
+    ],
+    "cpu_model_patterns": [
+      "ARM Cortex-A76"
+    ],
+    "revision_codes": ["c04170"]
+  },
+  "specs": {
+    "cuda_compute_capability": null,
+    "max_cuda_version": null,
+    "recommended_os": "Raspberry Pi OS (64-bit) Bookworm",
+    "gpu_model": "VideoCore VII",
+    "ram_gb": 8,
+    "recommended_glibc": "2.36",
+    "kernel_version_min": "6.1"
+  },
+  "compatibility": {
+    "python_versions": ["3.11", "3.12"],
+    "manylinux_tags": ["manylinux_2_36_aarch64"],
+    "cuda_versions": [],
+    "opencv_backends": ["V4L2", "GStreamer", "MMAL"]
+  },
+  "known_issues": {
+    "broken_wheels": [
+      {
+        "package": "tensorflow",
+        "versions": [">=2.12.0"],
+        "reason": "Official TensorFlow wheels not available for aarch64",
+        "recommendation": "Use tensorflow-aarch64 from community or build from source"
+      },
+      {
+        "package": "opencv-python",
+        "versions": ["*"],
+        "reason": "PyPI wheels lack hardware acceleration for VideoCore",
+        "recommendation": "Build opencv-python from source with V4L2 + GStreamer"
+      },
+      {
+        "package": "torch",
+        "versions": ["*"],
+        "reason": "No official ARM64 wheels, CPU-only",
+        "recommendation": "Use PyTorch for ARM or build from source"
+      }
+    ],
+    "incompatible_packages": [
+      "cupy",
+      "pycuda",
+      "tensorrt",
+      "nvidia-*"
+    ]
+  },
+  "recommendations": {
+    "use_64bit_os": "Required for modern Python packages",
+    "enable_hardware_accel": "Install libcamera + picamera2 for camera",
+    "install_from_source": ["opencv-python", "pillow-simd"],
+    "memory_optimization": "Enable ZRAM for better multitasking"
+  },
+  "validated_stacks": [
+    {
+      "name": "TensorFlow Lite + Coral",
+      "packages": {
+        "tflite-runtime": "2.14.0",
+        "pycoral": "2.0.0",
+        "numpy": "1.26.0"
+      }
+    },
+    {
+      "name": "OpenCV Computer Vision",
+      "packages": {
+        "numpy": "1.26.0",
+        "pillow": "10.0.0"
+      },
+      "build_opencv": true
+    }
+  ]
+}

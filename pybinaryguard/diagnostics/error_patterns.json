@@ -1,0 +1,72 @@
+[
+  {
+    "pattern": "version .GLIBC_(\\d+\\.\\d+). not found",
+    "root_cause": "GLIBC version too old",
+    "rule_id": "GLIBC_VERSION_MISMATCH",
+    "explanation": "Your system's C library (GLIBC) is older than what this package needs. The package was compiled on a newer Linux system.",
+    "fix_hint": "Upgrade your OS or use an older package version."
+  },
+  {
+    "pattern": "Illegal instruction",
+    "root_cause": "CPU instruction set mismatch",
+    "rule_id": "ILLEGAL_INSTRUCTION_RISK",
+    "explanation": "The package uses CPU instructions (like AVX2) that your processor doesn't support.",
+    "fix_hint": "Install a version built for your CPU, or use a different machine."
+  },
+  {
+    "pattern": "libcudart\\.so\\.(\\d+): cannot open",
+    "root_cause": "CUDA runtime version mismatch",
+    "rule_id": "CUDA_RUNTIME_MISMATCH",
+    "explanation": "The package was built for a different CUDA version than what's installed on your system.",
+    "fix_hint": "Install the package variant matching your CUDA version."
+  },
+  {
+    "pattern": "libcublas\\.so\\.(\\d+): cannot open",
+    "root_cause": "CUDA library missing",
+    "rule_id": "CUDA_LIB_MISSING",
+    "explanation": "A CUDA math library required by this package is not installed.",
+    "fix_hint": "Install the matching CUDA toolkit or reinstall the package for your CUDA version."
+  },
+  {
+    "pattern": "undefined symbol: _Py",
+    "root_cause": "Python ABI mismatch",
+    "rule_id": "PYTHON_ABI_MISMATCH",
+    "explanation": "The package was compiled for a different Python version's internal API.",
+    "fix_hint": "Reinstall the package for your current Python version."
+  },
+  {
+    "pattern": "module compiled against API version (0x[0-9a-f]+) but this version of numpy is (0x[0-9a-f]+)",
+    "root_cause": "NumPy C API version mismatch",
+    "rule_id": "NUMPY_ABI_MISMATCH",
+    "explanation": "The package was built against a different NumPy version's C API.",
+    "fix_hint": "Reinstall the package or upgrade/downgrade NumPy."
+  },
+  {
+    "pattern": "not a supported wheel on this platform",
+    "root_cause": "Platform/architecture mismatch",
+    "rule_id": "ARCH_MISMATCH",
+    "explanation": "This wheel was built for a different CPU architecture or OS.",
+    "fix_hint": "Download the correct wheel for your platform."
+  },
+  {
+    "pattern": "cudaErrorInsufficientDriver",
+    "root_cause": "GPU driver too old",
+    "rule_id": "CUDA_DRIVER_TOO_OLD",
+    "explanation": "Your GPU driver is too old to support the installed CUDA version.",
+    "fix_hint": "Update your NVIDIA GPU driver."
+  },
+  {
+    "pattern": "NVML: Driver/library version mismatch",
+    "root_cause": "Container driver mismatch",
+    "rule_id": "CONTAINER_DRIVER_MISMATCH",
+    "explanation": "The NVIDIA driver in your container doesn't match the host driver. This often happens when the container image has a newer CUDA than the host supports.",
+    "fix_hint": "Use nvidia-container-toolkit and ensure host driver supports your CUDA version."
+  },
+  {
+    "pattern": "libcudnn\\.so\\.\\d+: cannot open",
+    "root_cause": "cuDNN missing",
+    "rule_id": "CUDNN_VERSION_MISMATCH",
+    "explanation": "The cuDNN library required for GPU-accelerated deep learning is not installed.",
+    "fix_hint": "Install the cuDNN version matching your CUDA installation."
+  }
+]

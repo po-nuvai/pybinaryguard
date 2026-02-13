@@ -1,0 +1,81 @@
+{
+  "board_id": "jetson_nano",
+  "display_name": "NVIDIA Jetson Nano",
+  "vendor": "nvidia",
+  "architecture": "aarch64",
+  "detection": {
+    "dt_model_patterns": [
+      "NVIDIA Jetson Nano",
+      "jetson-nano"
+    ],
+    "tegra_version": "4.9",
+    "cpu_model_patterns": [
+      "ARM Cortex-A57"
+    ]
+  },
+  "specs": {
+    "cuda_compute_capability": "5.3",
+    "max_cuda_version": "10.2",
+    "recommended_jetpack": "4.6.x",
+    "gpu_model": "Maxwell (128 CUDA cores)",
+    "ram_gb": 4,
+    "recommended_glibc": "2.27",
+    "kernel_version_min": "4.9"
+  },
+  "compatibility": {
+    "python_versions": ["3.6", "3.7", "3.8"],
+    "manylinux_tags": ["manylinux2014_aarch64"],
+    "cuda_versions": ["10.0", "10.2"],
+    "tensorrt_versions": ["7.x", "8.0.x"]
+  },
+  "known_issues": {
+    "broken_wheels": [
+      {
+        "package": "torch",
+        "versions": [">=2.0.0"],
+        "reason": "PyTorch 2.x requires CUDA 11.x, Jetson Nano max is CUDA 10.2",
+        "recommendation": "Use torch==1.10.0+cu102 from NVIDIA"
+      },
+      {
+        "package": "tensorflow",
+        "versions": [">=2.5.0"],
+        "reason": "TensorFlow 2.5+ requires CUDA 11.2, incompatible with JetPack 4.6",
+        "recommendation": "Use tensorflow==2.4.1 or nvidia-tensorflow"
+      },
+      {
+        "package": "onnxruntime-gpu",
+        "versions": [">=1.12.0"],
+        "reason": "ONNX Runtime 1.12+ drops CUDA 10.2 support",
+        "recommendation": "Use onnxruntime-gpu==1.11.1"
+      }
+    ],
+    "incompatible_packages": [
+      "faiss-gpu",
+      "cupy-cuda11x",
+      "jax[cuda11]"
+    ]
+  },
+  "recommendations": {
+    "use_nvidia_containers": true,
+    "prefer_l4t_base": "nvcr.io/nvidia/l4t-base:r32.7.1",
+    "install_from_source": ["opencv-python"],
+    "enable_swap": "Recommended for 4GB RAM"
+  },
+  "validated_stacks": [
+    {
+      "name": "YOLOv5 Inference",
+      "packages": {
+        "torch": "1.10.0",
+        "torchvision": "0.11.0",
+        "onnxruntime-gpu": "1.8.1"
+      }
+    },
+    {
+      "name": "TensorFlow Lite",
+      "packages": {
+        "tensorflow": "2.4.1",
+        "numpy": "1.19.4"
+      }
+    }
+  ]
+}

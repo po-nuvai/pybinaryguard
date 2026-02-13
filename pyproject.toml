@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "pybinaryguard"
+version = "1.0.0"
+description = "Binary Compatibility Intelligence for Python — detect incompatibilities before they crash your program"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = []
+authors = [
+    {name = "S P Pothihai Selvan", email = "po@nuvai.dev"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: System :: Systems Administration",
+]
+keywords = ["binary", "compatibility", "elf", "glibc", "cuda", "diagnostics"]
+
+[project.optional-dependencies]
+full = ["pyelftools>=0.29"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+pybinaryguard = "pybinaryguard.cli.main:main"
+
+[project.entry-points."pybinaryguard.plugins"]
+jetson = "pybinaryguard.plugins.contrib.jetson:register"
+tensorrt = "pybinaryguard.plugins.contrib.tensorrt:register"
+opencv = "pybinaryguard.plugins.contrib.opencv:register"
+gstreamer = "pybinaryguard.plugins.contrib.gstreamer:register"
+
+[tool.setuptools.packages.find]
+include = ["pybinaryguard*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM"]

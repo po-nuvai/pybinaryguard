@@ -1,0 +1,16 @@
+{
+  "2.0.0": {"cuda_variants": ["11.7", "11.8"], "min_compute": [3, 7]},
+  "2.0.1": {"cuda_variants": ["11.7", "11.8"], "min_compute": [3, 7]},
+  "2.1.0": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.1.1": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.1.2": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.2.0": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.2.1": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.2.2": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.3.0": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.3.1": {"cuda_variants": ["11.8", "12.1"], "min_compute": [3, 7]},
+  "2.4.0": {"cuda_variants": ["11.8", "12.1", "12.4"], "min_compute": [3, 7]},
+  "2.4.1": {"cuda_variants": ["11.8", "12.1", "12.4"], "min_compute": [3, 7]},
+  "2.5.0": {"cuda_variants": ["11.8", "12.1", "12.4"], "min_compute": [3, 7]},
+  "2.5.1": {"cuda_variants": ["11.8", "12.1", "12.4"], "min_compute": [3, 7]}
+}

@@ -1,0 +1,71 @@
+{
+  "board_id": "jetson_orin_nx",
+  "display_name": "NVIDIA Jetson Orin NX",
+  "vendor": "nvidia",
+  "architecture": "aarch64",
+  "detection": {
+    "dt_model_patterns": [
+      "NVIDIA Jetson Orin NX",
+      "jetson-orin-nx"
+    ],
+    "tegra_version": "5.10",
+    "cpu_model_patterns": [
+      "ARM Cortex-A78AE"
+    ]
+  },
+  "specs": {
+    "cuda_compute_capability": "8.7",
+    "max_cuda_version": "12.2",
+    "recommended_jetpack": "6.0",
+    "gpu_model": "Ampere (1024/1536 CUDA cores)",
+    "ram_gb": 16,
+    "recommended_glibc": "2.35",
+    "kernel_version_min": "5.10"
+  },
+  "compatibility": {
+    "python_versions": ["3.8", "3.10", "3.11"],
+    "manylinux_tags": ["manylinux_2_35_aarch64"],
+    "cuda_versions": ["11.4", "11.8", "12.2"],
+    "tensorrt_versions": ["8.6.x"]
+  },
+  "known_issues": {
+    "broken_wheels": [
+      {
+        "package": "torch",
+        "versions": ["<2.0.0"],
+        "reason": "PyTorch 1.x wheels not optimized for Ampere architecture",
+        "recommendation": "Use torch>=2.1.0 with CUDA 12.2"
+      },
+      {
+        "package": "jax",
+        "versions": ["*"],
+        "reason": "JAX does not provide aarch64 wheels for CUDA",
+        "recommendation": "Build from source or use CPU-only version"
+      }
+    ],
+    "incompatible_packages": []
+  },
+  "recommendations": {
+    "use_nvidia_containers": true,
+    "prefer_l4t_base": "nvcr.io/nvidia/l4t-pytorch:r36.2.0",
+    "install_from_source": [],
+    "enable_max_performance": "sudo nvpmodel -m 0 && sudo jetson_clocks"
+  },
+  "validated_stacks": [
+    {
+      "name": "PyTorch 2.x + TensorRT",
+      "packages": {
+        "torch": "2.1.0",
+        "torchvision": "0.16.0",
+        "tensorrt": "8.6.2"
+      }
+    },
+    {
+      "name": "ONNX Runtime GPU",
+      "packages": {
+        "onnxruntime-gpu": "1.16.0",
+        "numpy": "1.24.0"
+      }
+    }
+  ]
+}
