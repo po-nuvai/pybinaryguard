@@ -35,5 +35,5 @@ htmlcov/
 *.tar.gz
 *.zip
 
-# Config
-.claude/
+# Local config
+.local/
