@@ -191,6 +191,24 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Package specifier or wheel filename to simulate",
     )
 
+    # validate (import testing)
+    validate_parser = subparsers.add_parser(
+        "validate", parents=[parent],
+        help="Test actual imports in isolated subprocesses",
+    )
+    validate_parser.add_argument(
+        "--packages",
+        nargs="*",
+        metavar="PKG",
+        help="Specific packages to test (default: all with binaries)",
+    )
+    validate_parser.add_argument(
+        "--import-timeout",
+        type=float,
+        default=10.0,
+        help="Timeout per import test in seconds (default: 10)",
+    )
+
     return parser
 
 

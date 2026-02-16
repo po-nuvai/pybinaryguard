@@ -56,6 +56,24 @@ class SystemProfile:
     board_name: Optional[str] = None
     jetpack_version: Optional[str] = None
 
+    # Build toolchain
+    toolchain_versions: Dict[str, str] = field(default_factory=dict)
+    default_cc: str = ""
+    default_cxx: str = ""
+    has_build_tools: bool = False
+    has_python_dev_headers: bool = False
+
+    # Virtual environment
+    venv_type: str = "system"
+    is_system_python: bool = True
+    is_virtual_env: bool = False
+    base_prefix: str = ""
+    prefix: str = ""
+    conda_env_name: str = ""
+    conda_prefix: str = ""
+    pip_user_site_enabled: bool = False
+    mixed_env_risk: bool = False
+
     # Library paths
     ld_library_path: Tuple[str, ...] = ()
     ldconfig_cache: Dict[str, str] = field(default_factory=dict)
@@ -90,4 +108,11 @@ class SystemProfile:
                 info["JetPack"] = self.jetpack_version
         if self.is_container:
             info["Container"] = self.container_runtime.value
+        if self.venv_type != "system":
+            info["Environment"] = self.venv_type
+        if self.toolchain_versions:
+            cc = self.toolchain_versions.get("gcc") or self.toolchain_versions.get("clang")
+            if cc:
+                compiler = "gcc" if "gcc" in self.toolchain_versions else "clang"
+                info["Compiler"] = f"{compiler} {cc}"
         return info

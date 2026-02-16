@@ -34,6 +34,7 @@ def dispatch(args: argparse.Namespace) -> int:
         "verify": cmd_verify,
         "export-tool-schema": cmd_export_tool_schema,
         "simulate": cmd_simulate,
+        "validate": cmd_validate,
     }
     handler = handlers.get(args.command)
     if handler is None:
@@ -325,6 +326,80 @@ def cmd_simulate(args: argparse.Namespace) -> int:
                 print(f"      - {w['message']}")
 
     return 0 if result.predicted_compatible else 2
+
+
+def cmd_validate(args: argparse.Namespace) -> int:
+    """Test actual imports in isolated subprocesses."""
+    import json
+
+    from pybinaryguard.scanner import Scanner
+    from pybinaryguard.validators.import_validator import ImportValidator
+
+    scanner = Scanner(timeout=args.timeout, scan_mode=ScanMode.FAST)
+    report = scanner.run()
+
+    # Discover packages to test
+    validator = ImportValidator(
+        timeout=getattr(args, "import_timeout", 10.0),
+    )
+
+    # Get packages with binary extensions
+    test_packages = getattr(args, "packages", None)
+    packages_to_test = []
+
+    # Walk site-packages to find packages with top_level.txt
+    import os
+    for sp in scanner.get_profile().site_packages_paths:
+        if not os.path.isdir(sp):
+            continue
+        for entry in os.listdir(sp):
+            if entry.endswith(".dist-info"):
+                pkg_name = entry.rsplit("-", 2)[0].replace("_", "-")
+                if test_packages and pkg_name not in test_packages:
+                    continue
+                top_level = validator.get_top_level_name(
+                    os.path.join(sp, entry), pkg_name
+                )
+                # Only test packages with binary files (unless specific list given)
+                if test_packages:
+                    packages_to_test.append((pkg_name, top_level))
+                else:
+                    # Check if package has .so files
+                    pkg_dir = os.path.join(sp, top_level)
+                    has_so = False
+                    if os.path.isdir(pkg_dir):
+                        for root, _dirs, files in os.walk(pkg_dir):
+                            if any(f.endswith(".so") for f in files):
+                                has_so = True
+                                break
+                    if has_so:
+                        packages_to_test.append((pkg_name, top_level))
+
+    if not packages_to_test:
+        print("No packages with binary extensions found to validate.")
+        return 0
+
+    fmt = getattr(args, "format", "table")
+    print(f"Testing {len(packages_to_test)} package imports...\n")
+
+    results = validator.test_packages(packages_to_test)
+    failures = [r for r in results if not r.success]
+
+    if fmt == "json":
+        output = json.dumps([r.as_dict() for r in results], indent=2)
+        print(output)
+    else:
+        for r in results:
+            if r.success:
+                print(f"  [OK]   {r.package_name} ({r.duration_ms:.0f}ms)")
+            else:
+                print(f"  [FAIL] {r.package_name}: {r.error_type} — {r.error_message}")
+                if r.category:
+                    print(f"         Category: {r.category}")
+
+        print(f"\n{len(results) - len(failures)} passed, {len(failures)} failed")
+
+    return 2 if failures else 0
 
 
 def _exit_code(critical: int, warning: int) -> int:

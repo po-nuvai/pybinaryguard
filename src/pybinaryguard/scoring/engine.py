@@ -56,6 +56,12 @@ _CATEGORY_MAP: Dict[str, str] = {
     "AVX": "binary_stability",
     "ILLEGAL_INSTRUCTION_": "binary_stability",
     "CPU_": "binary_stability",
+    # Source build
+    "SOURCE_BUILD_": "binary_stability",
+    # Dependency health
+    "DEPENDENCY_": "dependency_health",
+    # Virtual environment
+    "VENV_": "platform_risk",
 }
 
 # Category display metadata

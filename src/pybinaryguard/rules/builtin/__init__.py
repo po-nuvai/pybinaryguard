@@ -62,6 +62,21 @@ def get_all_builtin_rules() -> List[Rule]:
         PREDICTED_IMPORT_ERROR,
         UNRESOLVED_DEPENDENCY_CHAIN,
     )
+    from pybinaryguard.rules.builtin.source_build_rules import (
+        MissingPythonHeadersRule,
+        SourceBuildDetectionRule,
+        SourceBuildNoCompilerRule,
+    )
+    from pybinaryguard.rules.builtin.dependency_rules import (
+        DependencyConflictRule,
+        MissingDependencyRule,
+    )
+    from pybinaryguard.rules.builtin.venv_rules import (
+        CondaPipMixingRule,
+        MixedEnvironmentRule,
+        SystemPythonWarningRule,
+        UserSiteLeakRule,
+    )
 
     return [
         # GLIBC rules
@@ -106,4 +121,16 @@ def get_all_builtin_rules() -> List[Rule]:
         # Predictive rules (runtime simulation)
         PREDICTED_IMPORT_ERROR(),
         UNRESOLVED_DEPENDENCY_CHAIN(),
+        # Source build rules
+        SourceBuildDetectionRule(),
+        SourceBuildNoCompilerRule(),
+        MissingPythonHeadersRule(),
+        # Dependency conflict rules
+        DependencyConflictRule(),
+        MissingDependencyRule(),
+        # Virtual environment rules
+        SystemPythonWarningRule(),
+        MixedEnvironmentRule(),
+        UserSiteLeakRule(),
+        CondaPipMixingRule(),
     ]
