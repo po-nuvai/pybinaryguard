@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT License">
   <img src="https://img.shields.io/badge/platform-linux-orange?style=for-the-badge&logo=linux&logoColor=white" alt="Linux">
   <img src="https://img.shields.io/badge/version-1.0.0-purple?style=for-the-badge" alt="v1.0.0">
-  <img src="https://img.shields.io/badge/tests-450%20passing-brightgreen?style=for-the-badge" alt="450 Tests">
+  <img src="https://img.shields.io/badge/tests-505%20passing-brightgreen?style=for-the-badge" alt="505 Tests">
 </p>
 
 <h1 align="center">PyBinaryGuard</h1>
