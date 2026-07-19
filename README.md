@@ -1,8 +1,10 @@
 <p align="center">
+  <a href="https://pypi.org/project/pybinaryguard/"><img src="https://img.shields.io/pypi/v/pybinaryguard?style=for-the-badge&logo=pypi&logoColor=white&color=purple" alt="PyPI"></a>
+  <a href="https://pypi.org/project/pybinaryguard/"><img src="https://img.shields.io/pypi/dm/pybinaryguard?style=for-the-badge&color=blue" alt="Downloads"></a>
+  <a href="https://github.com/Nuvai/pybinaryguard/stargazers"><img src="https://img.shields.io/github/stars/Nuvai/pybinaryguard?style=for-the-badge&logo=github&color=yellow" alt="Stars"></a>
   <img src="https://img.shields.io/badge/python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT License">
   <img src="https://img.shields.io/badge/platform-linux-orange?style=for-the-badge&logo=linux&logoColor=white" alt="Linux">
-  <img src="https://img.shields.io/badge/version-1.0.1-purple?style=for-the-badge" alt="v1.0.1">
   <img src="https://img.shields.io/badge/tests-505%20passing-brightgreen?style=for-the-badge" alt="505 Tests">
 </p>
 
