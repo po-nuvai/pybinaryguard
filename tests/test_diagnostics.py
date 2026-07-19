@@ -48,7 +48,7 @@ def _finding(
 def _make_profile(**kwargs: object) -> SystemProfile:
     defaults = dict(
         python_version=(3, 12, 0),
-        python_abi_tag="cpython-312-x86_64-linux-gnu",
+        python_abi_tag="cp312",
         python_implementation="cpython",
         python_executable="/usr/bin/python3",
         os_name="Ubuntu",

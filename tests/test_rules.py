@@ -42,7 +42,7 @@ def _make_profile(**kwargs: object) -> SystemProfile:
     """Create a SystemProfile with defaults that can be overridden."""
     defaults = dict(
         python_version=(3, 12, 0),
-        python_abi_tag="cpython-312-x86_64-linux-gnu",
+        python_abi_tag="cp312",
         python_implementation="cpython",
         python_executable="/usr/bin/python3",
         stable_abi_supported=True,
@@ -211,7 +211,7 @@ class TestManylinuxTagViolationRule:
 class TestPythonABIMismatchRule:
     def test_finding_when_abi_mismatch(self) -> None:
         rule = PythonABIMismatchRule()
-        profile = _make_profile(python_abi_tag="cpython-312-x86_64-linux-gnu")
+        profile = _make_profile(python_abi_tag="cp312")
         pkg = _make_package(
             package_name="scipy",
             wheel_tags=[WheelTag("cp310", "cp310", "manylinux_2_17_x86_64")],
@@ -223,16 +223,16 @@ class TestPythonABIMismatchRule:
 
     def test_no_finding_when_abi_matches(self) -> None:
         rule = PythonABIMismatchRule()
-        profile = _make_profile(python_abi_tag="cpython-312-x86_64-linux-gnu")
+        profile = _make_profile(python_abi_tag="cp312")
         pkg = _make_package(
-            wheel_tags=[WheelTag("cp312", "cpython-312-x86_64-linux-gnu", "manylinux_2_17_x86_64")],
+            wheel_tags=[WheelTag("cp312", "cp312", "manylinux_2_17_x86_64")],
         )
         findings = rule.evaluate(profile, [pkg])
         assert len(findings) == 0
 
     def test_skips_abi3_tags(self) -> None:
         rule = PythonABIMismatchRule()
-        profile = _make_profile(python_abi_tag="cpython-312-x86_64-linux-gnu")
+        profile = _make_profile(python_abi_tag="cp312")
         pkg = _make_package(
             wheel_tags=[WheelTag("cp312", "abi3", "manylinux_2_17_x86_64")],
         )
@@ -241,7 +241,7 @@ class TestPythonABIMismatchRule:
 
     def test_skips_none_abi(self) -> None:
         rule = PythonABIMismatchRule()
-        profile = _make_profile(python_abi_tag="cpython-312-x86_64-linux-gnu")
+        profile = _make_profile(python_abi_tag="cp312")
         pkg = _make_package(
             wheel_tags=[WheelTag("py3", "none", "any")],
         )
@@ -250,7 +250,7 @@ class TestPythonABIMismatchRule:
 
     def test_skips_pure_python(self) -> None:
         rule = PythonABIMismatchRule()
-        profile = _make_profile(python_abi_tag="cpython-312-x86_64-linux-gnu")
+        profile = _make_profile(python_abi_tag="cp312")
         pkg = _make_package(is_pure_python=True)
         findings = rule.evaluate(profile, [pkg])
         assert len(findings) == 0

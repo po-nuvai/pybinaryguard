@@ -32,7 +32,7 @@ class StubProbe:
     def collect(self) -> Dict[str, Any]:
         return {
             "python_version": (3, 12, 0),
-            "python_abi_tag": "cpython-312-x86_64-linux-gnu",
+            "python_abi_tag": "cp312",
             "python_implementation": "cpython",
             "python_executable": "/usr/bin/python3",
             "architecture": Architecture.X86_64,

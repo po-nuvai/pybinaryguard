@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pybinaryguard"
-version = "1.0.0"
+version = "1.0.1"
 description = "Binary Compatibility Intelligence for Python — detect incompatibilities before they crash your program"
 readme = "README.md"
 license = "MIT"

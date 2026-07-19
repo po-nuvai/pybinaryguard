@@ -5,6 +5,19 @@ All notable changes to PyBinaryGuard will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-07-19
+
+### Fixed
+
+- **`PYTHON_ABI_MISMATCH` false positives.** The `PythonProbe` returned the
+  raw `sysconfig.SOABI` string (e.g. `"cpython-312-x86_64-linux-gnu"`) as the
+  system ABI tag, but wheel `WHEEL` metadata uses PEP 425 tags
+  (e.g. `"cp312"`). Direct string comparison flagged every C-extension wheel
+  as CRITICAL on healthy environments, dropping the health score by ~40
+  points. The probe now returns the PEP 425 wheel-style tag
+  (`cp312`, `cp312d` for debug builds, `pypy39_pp73` for PyPy, etc.), which
+  matches the namespace used by real wheels.
+
 ## [1.0.0] - 2025-02-13
 
 ### Added

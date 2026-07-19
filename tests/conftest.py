@@ -19,7 +19,7 @@ def sample_profile() -> SystemProfile:
     """A SystemProfile with common values (Ubuntu 22.04, x86_64, Python 3.12, GLIBC 2.35, CUDA 12.2)."""
     return SystemProfile(
         python_version=(3, 12, 0),
-        python_abi_tag="cpython-312-x86_64-linux-gnu",
+        python_abi_tag="cp312",
         python_implementation="cpython",
         python_executable="/usr/bin/python3",
         stable_abi_supported=True,
@@ -62,7 +62,7 @@ def jetson_profile() -> SystemProfile:
     """A SystemProfile for Jetson Orin (aarch64, JetPack 6.0, GLIBC 2.35, CUDA 12.2)."""
     return SystemProfile(
         python_version=(3, 10, 12),
-        python_abi_tag="cpython-310-aarch64-linux-gnu",
+        python_abi_tag="cp310",
         python_implementation="cpython",
         python_executable="/usr/bin/python3",
         stable_abi_supported=True,
@@ -103,7 +103,7 @@ def alpine_profile() -> SystemProfile:
     """A SystemProfile for Alpine Linux (musl, no glibc)."""
     return SystemProfile(
         python_version=(3, 11, 6),
-        python_abi_tag="cpython-311-x86_64-linux-musl",
+        python_abi_tag="cp311",
         python_implementation="cpython",
         python_executable="/usr/bin/python3",
         stable_abi_supported=True,
@@ -133,7 +133,7 @@ def no_gpu_profile() -> SystemProfile:
     """A SystemProfile with no GPU."""
     return SystemProfile(
         python_version=(3, 12, 0),
-        python_abi_tag="cpython-312-x86_64-linux-gnu",
+        python_abi_tag="cp312",
         python_implementation="cpython",
         python_executable="/usr/bin/python3",
         stable_abi_supported=True,

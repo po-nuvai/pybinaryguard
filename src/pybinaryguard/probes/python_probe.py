@@ -14,7 +14,9 @@ class PythonProbe(ProbeBase):
 
     Gathered fields:
     - ``python_version``: 3-tuple of (major, minor, micro)
-    - ``python_abi_tag``: e.g. ``"cp312-cp312-linux_x86_64"``
+    - ``python_abi_tag``: PEP 425 wheel-style tag, e.g. ``"cp312"``, ``"cp312d"``
+      (debug), ``"pypy39_pp73"``. This is the value compared against a wheel's
+      ABI tag from its ``WHEEL`` metadata — *not* the raw ``SOABI``.
     - ``python_implementation``: e.g. ``"cpython"``, ``"pypy"``
     - ``python_executable``: absolute path to the interpreter
     - ``stable_abi_supported``: whether the stable ABI (abi3) is supported
@@ -50,27 +52,34 @@ class PythonProbe(ProbeBase):
 
     @staticmethod
     def _get_abi_tag() -> str:
-        """Build the ABI tag from sysconfig variables.
+        """Return the PEP 425 wheel-style ABI tag.
 
-        Falls back to a constructed tag from ``sys.implementation`` when
-        sysconfig does not provide ``SOABI``.
+        Examples: ``"cp312"``, ``"cp312d"`` (debug), ``"pypy39_pp73"``.
+
+        This intentionally does NOT return ``sysconfig.SOABI``
+        (``"cpython-312-x86_64-linux-gnu"``) — that string lives in a different
+        namespace than the ABI tag inside a wheel's ``WHEEL`` metadata, and
+        comparing them directly produces false-positive mismatches on every
+        real wheel.
         """
         try:
-            soabi = sysconfig.get_config_var("SOABI")
-            if soabi:
-                return str(soabi)
-
-            # Fallback: build from implementation info
-            impl = sys.implementation.name[0:2]  # "cp" for cpython
-            ver = f"{sys.version_info.major}{sys.version_info.minor}"
-            tag = f"{impl}{ver}"
-
-            # Append debug/unicode suffixes for older Python builds
+            impl = sys.implementation.name
+            major = sys.version_info.major
+            minor = sys.version_info.minor
             abiflags = sysconfig.get_config_var("abiflags") or ""
-            if abiflags:
-                tag += abiflags
 
-            return tag
+            if impl == "cpython":
+                return f"cp{major}{minor}{abiflags}"
+
+            if impl == "pypy":
+                pypy_ver = getattr(sys, "pypy_version_info", None)
+                if pypy_ver is not None:
+                    return f"pypy{major}{minor}_pp{pypy_ver[0]}{pypy_ver[1]}"
+                return f"pp{major}{minor}"
+
+            # Other implementations (graalpy, ironpython, jython, ...)
+            prefix = impl[:2] if impl else "xx"
+            return f"{prefix}{major}{minor}{abiflags}"
         except Exception:
             return ""
 
