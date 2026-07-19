@@ -91,12 +91,25 @@ PyBinaryGuard is the **first tool** that correlates your Python version, CPU arc
 
 ## Quick Start
 
-```bash
-# Clone and install
-git clone https://github.com/vikash-nuvai/pybinaryguard.git
-cd pybinaryguard
-pip install -e .
+### Install
 
+```bash
+# Recommended — isolated CLI install (Ubuntu 24.04+, Debian 12+, etc.)
+pipx install pybinaryguard
+
+# Or per-user install
+pip install --user pybinaryguard
+
+# Or classic pip (inside a venv)
+pip install pybinaryguard
+```
+
+> **Note:** On modern Linux distros (Ubuntu 24.04+, Debian 12+), system-wide
+> `pip install` is blocked by PEP 668. Use `pipx` or a virtual environment.
+
+### Use
+
+```bash
 # Run a full scan
 pybinaryguard scan
 
@@ -108,6 +121,15 @@ pybinaryguard scan --fast
 
 # Deep scan (full symbol resolution + hash verification)
 pybinaryguard scan --deep
+```
+
+### Install from source (for development)
+
+```bash
+git clone https://github.com/Nuvai/pybinaryguard.git
+cd pybinaryguard
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
 ```
 
 ---
