@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Maintained by [Pothihai Selvan (@po-nuvai)](https://github.com/po-nuvai) at [Nuvai AI Solutions](https://nuvai.dev).
 
+## [1.0.2] - 2026-07-19
+
+### Changed
+
+- **Correct canonical GitHub URLs** in `[project.urls]`. Homepage, Repository,
+  Issues, and Changelog now point to `github.com/po-nuvai/pybinaryguard`
+  directly instead of `github.com/Nuvai/pybinaryguard` (a redirect). PyPI
+  sidebar links now resolve without a redirect hop.
+- **Author metadata refined.** Added `[maintainers]` field crediting Nuvai
+  AI Solutions; normalised author name to "Pothihai Selvan".
+- **README install section rewritten** — `pipx` recommended, with a PEP 668
+  note for Ubuntu 24.04+ / Debian 12+ users where system-wide `pip install`
+  is blocked by default.
+- **Author section expanded** in README with GitHub handle, company link,
+  and contact info.
+
+### Fixed
+
+- Fixed hardcoded version strings in CLI banner and JSON output — every
+  release will now display the correct version in `pybinaryguard --version`,
+  scan headers, and JSON export.
+
+No code / rule-engine changes in this release. Existing users on 1.0.1 can
+safely defer the upgrade; new installs will pick up 1.0.2 automatically.
+
 ## [1.0.1] - 2026-07-19
 
 ### Fixed
