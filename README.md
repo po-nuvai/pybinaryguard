@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://pypi.org/project/pybinaryguard/"><img src="https://img.shields.io/pypi/v/pybinaryguard?style=for-the-badge&logo=pypi&logoColor=white&color=purple" alt="PyPI"></a>
   <a href="https://pypi.org/project/pybinaryguard/"><img src="https://img.shields.io/pypi/dm/pybinaryguard?style=for-the-badge&color=blue" alt="Downloads"></a>
-  <a href="https://github.com/Nuvai/pybinaryguard/stargazers"><img src="https://img.shields.io/github/stars/Nuvai/pybinaryguard?style=for-the-badge&logo=github&color=yellow" alt="Stars"></a>
+  <a href="https://github.com/po-nuvai/pybinaryguard/stargazers"><img src="https://img.shields.io/github/stars/po-nuvai/pybinaryguard?style=for-the-badge&logo=github&color=yellow" alt="Stars"></a>
   <img src="https://img.shields.io/badge/python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT License">
   <img src="https://img.shields.io/badge/platform-linux-orange?style=for-the-badge&logo=linux&logoColor=white" alt="Linux">
@@ -128,7 +128,7 @@ pybinaryguard scan --deep
 ### Install from source (for development)
 
 ```bash
-git clone https://github.com/Nuvai/pybinaryguard.git
+git clone https://github.com/po-nuvai/pybinaryguard.git
 cd pybinaryguard
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"

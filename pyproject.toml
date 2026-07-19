@@ -29,10 +29,10 @@ classifiers = [
 keywords = ["binary", "compatibility", "elf", "glibc", "cuda", "diagnostics"]
 
 [project.urls]
-Homepage = "https://github.com/Nuvai/pybinaryguard"
-Repository = "https://github.com/Nuvai/pybinaryguard"
-Issues = "https://github.com/Nuvai/pybinaryguard/issues"
-Changelog = "https://github.com/Nuvai/pybinaryguard/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/po-nuvai/pybinaryguard"
+Repository = "https://github.com/po-nuvai/pybinaryguard"
+Issues = "https://github.com/po-nuvai/pybinaryguard/issues"
+Changelog = "https://github.com/po-nuvai/pybinaryguard/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 full = ["pyelftools>=0.29"]
