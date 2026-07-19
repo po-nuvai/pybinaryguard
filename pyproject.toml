@@ -16,7 +16,6 @@ authors = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
@@ -28,6 +27,12 @@ classifiers = [
     "Topic :: System :: Systems Administration",
 ]
 keywords = ["binary", "compatibility", "elf", "glibc", "cuda", "diagnostics"]
+
+[project.urls]
+Homepage = "https://github.com/Nuvai/pybinaryguard"
+Repository = "https://github.com/Nuvai/pybinaryguard"
+Issues = "https://github.com/Nuvai/pybinaryguard/issues"
+Changelog = "https://github.com/Nuvai/pybinaryguard/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 full = ["pyelftools>=0.29"]
