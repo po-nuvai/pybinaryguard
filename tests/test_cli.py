@@ -216,7 +216,7 @@ class TestFormatterOutput:
         import json
         data = json.loads(output)
         assert "profile" in data
-        assert data["version"] == "1.0.0"
+        assert data["version"] == "1.0.1"
 
     def test_json_formatter_format_check_no_findings(self) -> None:
         from pybinaryguard.models.system import SystemProfile

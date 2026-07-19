@@ -936,7 +936,7 @@ Captures a complete **binary-level fingerprint** of your environment:
 
 ```json
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "timestamp": "2026-02-16T10:30:00Z",
   "system": {
     "python_version": "3.12.1",
@@ -1400,5 +1400,5 @@ It exists because **the developer's code is correct** — but the compiled binar
 
 ---
 
-*PyBinaryGuard v1.0.0 — Binary Compatibility Intelligence for Python*
+*PyBinaryGuard v1.0.1 — Binary Compatibility Intelligence for Python*
 *Created by S P Pothihai Selvan (Po-nuvai) at Nuvai AI Solution Pvt Ltd*

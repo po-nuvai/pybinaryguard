@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT License">
   <img src="https://img.shields.io/badge/platform-linux-orange?style=for-the-badge&logo=linux&logoColor=white" alt="Linux">
-  <img src="https://img.shields.io/badge/version-1.0.0-purple?style=for-the-badge" alt="v1.0.0">
+  <img src="https://img.shields.io/badge/version-1.0.1-purple?style=for-the-badge" alt="v1.0.1">
   <img src="https://img.shields.io/badge/tests-505%20passing-brightgreen?style=for-the-badge" alt="505 Tests">
 </p>
 
@@ -779,7 +779,7 @@ pybinaryguard/
 |           |-- commands.py      # Command handlers
 |           +-- formatters.py    # Output formatting (table/json/minimal)
 |
-|-- tests/                       # 450 tests
+|-- tests/                       # 505 tests
 |-- docs/                        # Documentation
 +-- examples/                    # Usage examples
 ```
@@ -816,7 +816,7 @@ pybinaryguard/
 ## Testing
 
 ```bash
-# Run all tests (450 tests)
+# Run all tests (505 tests)
 python -m pytest tests/ -v
 
 # Run with coverage
