@@ -856,8 +856,14 @@ python -m pytest tests/test_agent_sdk.py -v    # Agent SDK
 
 ## Author
 
-**S P Pothihai Selvan** (Po-nuvai)
-Applied Research Scientist @ [Nuvai AI Solution Pvt Ltd](https://nuvai.dev)
+**Pothihai Selvan** — [@po-nuvai](https://github.com/po-nuvai)
+Applied Research Scientist at [Nuvai AI Solutions](https://nuvai.dev)
+
+Built PyBinaryGuard to solve the bug that once cost him weeks of debugging on an NVIDIA Jetson TX2 — see the [Origin Story](#origin-story) at the top of this README for the full backstory.
+
+- **GitHub:** [github.com/po-nuvai](https://github.com/po-nuvai)
+- **Email:** [po@nuvai.dev](mailto:po@nuvai.dev)
+- **Company:** [Nuvai AI Solutions](https://nuvai.dev) — Applied AI research and developer tooling
 
 ---
 

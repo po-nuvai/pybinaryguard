@@ -11,7 +11,10 @@ license = "MIT"
 requires-python = ">=3.9"
 dependencies = []
 authors = [
-    {name = "S P Pothihai Selvan", email = "po@nuvai.dev"},
+    {name = "Pothihai Selvan", email = "po@nuvai.dev"},
+]
+maintainers = [
+    {name = "Pothihai Selvan (@po-nuvai) — Nuvai AI Solutions", email = "po@nuvai.dev"},
 ]
 classifiers = [
     "Development Status :: 4 - Beta",

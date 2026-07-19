@@ -1401,4 +1401,4 @@ It exists because **the developer's code is correct** — but the compiled binar
 ---
 
 *PyBinaryGuard v1.0.1 — Binary Compatibility Intelligence for Python*
-*Created by S P Pothihai Selvan (Po-nuvai) at Nuvai AI Solution Pvt Ltd*
+*Created by [Pothihai Selvan (@po-nuvai)](https://github.com/po-nuvai) — Applied Research Scientist at [Nuvai AI Solutions](https://nuvai.dev)*
