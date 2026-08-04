@@ -15,7 +15,7 @@ Quick start::
 
 from __future__ import annotations
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 from pybinaryguard.models.enums import ScanMode, Severity
 from pybinaryguard.models.finding import Finding, ScanReport

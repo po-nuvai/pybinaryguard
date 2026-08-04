@@ -208,7 +208,7 @@ class TableFormatter(FormatterBase):
 
         # Header
         lines.append(
-            f"{c.BOLD}PyBinaryGuard v1.0.3 \u2014 Binary Compatibility Scanner{c.RESET}"
+            f"{c.BOLD}PyBinaryGuard v1.0.4 \u2014 Binary Compatibility Scanner{c.RESET}"
         )
         lines.append(f"{c.DIM}{_HEADER_LINE}{c.RESET}")
         lines.append("")
@@ -350,7 +350,7 @@ class TableFormatter(FormatterBase):
         lines: List[str] = []
 
         lines.append(
-            f"{c.BOLD}PyBinaryGuard v1.0.3 \u2014 System Profile{c.RESET}"
+            f"{c.BOLD}PyBinaryGuard v1.0.4 \u2014 System Profile{c.RESET}"
         )
         lines.append(f"{c.DIM}{_HEADER_LINE}{c.RESET}")
         lines.append("")
@@ -505,7 +505,7 @@ class JSONFormatter(FormatterBase):
             scan_data["score_breakdown"] = report.score_breakdown.as_dict()
 
         output: Dict[str, Any] = {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "profile": self._profile_dict(profile),
             "scan": scan_data,
             "findings": [f.as_dict() for f in report.findings],
@@ -521,7 +521,7 @@ class JSONFormatter(FormatterBase):
     ) -> str:
         """Format check findings as JSON."""
         output: Dict[str, Any] = {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "package": package,
             "findings": [f.as_dict() for f in findings],
             "summary": {
@@ -536,7 +536,7 @@ class JSONFormatter(FormatterBase):
     def format_profile(self, profile: SystemProfile) -> str:
         """Format a system profile as JSON."""
         output: Dict[str, Any] = {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "profile": self._profile_dict(profile),
         }
         return json.dumps(output, indent=2, default=str)
@@ -544,7 +544,7 @@ class JSONFormatter(FormatterBase):
     def format_doctor(self, diagnosis: Dict[str, Any]) -> str:
         """Format a doctor result as JSON."""
         output: Dict[str, Any] = {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "diagnosis": {},
         }
         if "error" in diagnosis:

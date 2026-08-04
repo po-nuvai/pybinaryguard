@@ -118,9 +118,13 @@ class LibraryProbe(ProbeBase):
             # site.getsitepackages may not exist in virtualenvs
             pass
 
+        # Only include the user-site directory when it's actually on sys.path.
+        # In a venv, site.getusersitepackages() still returns ~/.local/... even
+        # though it's excluded from sys.path — including it here would leak
+        # packages from outside the active environment into the scan.
         try:
             user_path = site.getusersitepackages()
-            if isinstance(user_path, str):
+            if isinstance(user_path, str) and user_path in sys.path:
                 paths.append(user_path)
         except (AttributeError, Exception):
             pass

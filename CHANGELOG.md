@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Maintained by [Pothihai Selvan (@po-nuvai)](https://github.com/po-nuvai) at [Nuvai AI Solutions](https://nuvai.dev).
 
+## [1.0.4] - 2026-08-05
+
+### Fixed
+
+- **Venv-scoped scanning.** `Scanner` was including `~/.local/lib/pythonX/site-packages`
+  in every scan even when running inside an activated venv that did not have
+  it on `sys.path`. This leaked user-site packages into venv scans, inflating
+  package counts (e.g. 89 → 157 on a typical Ubuntu box) and generating
+  phantom warnings about packages the user could not `pip uninstall` from
+  the active environment. `LibraryProbe._get_site_packages` now only
+  includes the user-site directory when it is actually on `sys.path`.
+
+- **`VENV_SYSTEM_PYTHON` false positive.** `VenvProbe` was never wired into
+  the default probe list, so `SystemProfile.is_virtual_env` and
+  `is_system_python` stayed at their defaults (`False`/`True`). The result:
+  `SystemPythonWarningRule` fired on every scan even inside an active venv,
+  and the CLI header never showed the `Environment: venv/conda/...` line.
+  `VenvProbe` is now registered alongside the other built-in probes.
+
 ## [1.0.3] - 2026-08-04
 
 ### Fixed

@@ -237,6 +237,7 @@ class Scanner:
         from pybinaryguard.probes.library_probe import LibraryProbe
         from pybinaryguard.probes.os_probe import OsProbe
         from pybinaryguard.probes.python_probe import PythonProbe
+        from pybinaryguard.probes.venv_probe import VenvProbe
 
         probes: list = [
             PythonProbe(),
@@ -245,6 +246,7 @@ class Scanner:
             GlibcProbe(),
             LibraryProbe(),
             BoardProbe(),
+            VenvProbe(),
         ]
 
         # Add plugin probes
