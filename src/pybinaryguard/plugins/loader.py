@@ -76,20 +76,22 @@ def _load_entry_point_plugins(registry: HookRegistry) -> None:
 
     for ep in eps:
         try:
-            plugin_module = ep.load()
-            register_fn = getattr(plugin_module, "register", None)
+            resolved = ep.load()
+            if callable(resolved):
+                register_fn = resolved
+            else:
+                register_fn = getattr(resolved, "register", None)
             if register_fn is None:
                 logger.warning(
-                    "Plugin entry point %r resolved to %r but it has no "
-                    "'register' function; skipping",
+                    "Plugin entry point %r resolved to %r but no 'register' "
+                    "function was found; skipping",
                     ep.name,
-                    plugin_module,
+                    resolved,
                 )
                 continue
             if not callable(register_fn):
                 logger.warning(
-                    "Plugin %r has a 'register' attribute but it is not "
-                    "callable; skipping",
+                    "Plugin %r 'register' attribute is not callable; skipping",
                     ep.name,
                 )
                 continue

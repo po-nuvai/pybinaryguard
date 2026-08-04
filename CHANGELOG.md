@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Maintained by [Pothihai Selvan (@po-nuvai)](https://github.com/po-nuvai) at [Nuvai AI Solutions](https://nuvai.dev).
 
+## [1.0.3] - 2026-08-04
+
+### Fixed
+
+- **Contrib plugins now load correctly.** The `pyproject.toml` declared
+  entry points with a `:register` suffix (e.g.
+  `pybinaryguard.plugins.contrib.jetson:register`), which caused
+  `ep.load()` to return the `register` function directly. The loader
+  then tried to look up a `.register` attribute on that function,
+  failed, and skipped the plugin — printing the noisy warning
+  `Plugin entry point 'jetson' resolved to <function register at 0x...>
+  but it has no 'register' function; skipping` at startup. Every
+  built-in contrib plugin (Jetson board detection, TensorRT probes,
+  OpenCV, GStreamer) was silently disabled as a result.
+
+  Two-part fix: the loader now accepts both conventions (callable
+  return OR module with a `.register` attribute), and the redundant
+  `[project.entry-points]` block was removed since the built-in
+  contrib plugins are already loaded via
+  `_load_builtin_contrib_plugins` and would otherwise register twice.
+
 ## [1.0.2] - 2026-07-19
 
 ### Changed
